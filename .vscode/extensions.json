@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "infarkt.css-to-jss",
+    "mike-co.import-sorter",
+    "usernamehw.errorlens"
+  ]
+}

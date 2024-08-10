@@ -1,0 +1,187 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator pothos {
+  provider = "prisma-pothos-types"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+}
+
+enum AccountType {
+  LEAD
+  PROSPECT
+  CUSTOMER
+  CHURNED
+}
+
+enum UserRole {
+  ADMIN
+  USER
+  MODERATOR
+  GUEST
+}
+
+enum OpportunityStatus {
+  OPEN
+  WON
+  LOST
+  IN_PROGRESS
+  ON_HOLD
+  CLOSED
+}
+
+model account {
+  id                      Int       @id @default(autoincrement())
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  accountName             String
+  accountNumber           String    @unique
+  industry                String?
+  website                 String?
+  phoneNumber             String?
+  email                   String?
+  billingAddress          String?
+  shippingAddress         String?
+  city                    String?
+  state                   String?
+  postalCode              String?
+  country                 String?
+  annualRevenue           Float?
+  numberOfEmployees       Int?
+  ownership               String?
+  parentAccountId         Int?
+  accountSource           String?
+  description             String?
+  createdDate             DateTime  @default(now())
+  lastModifiedDate        DateTime  @updatedAt
+  lastActivityDate        DateTime?
+  rating                  Int?
+  sicCode                 String?
+  tickerSymbol            String?
+  ownershipType           String?
+  accountType             AccountType?
+  territory               String?
+  marketSegment           String?
+  primaryContactName      String?
+  primaryContactEmail     String?
+  primaryContactPhone     String?
+  secondaryContactName    String?
+  secondaryContactEmail   String?
+  secondaryContactPhone   String?
+  accountManagerId        Int?
+  accountManagerName      String?
+  accountManagerEmail     String?
+  accountManagerPhone     String?
+  renewalDate             DateTime?
+  contractStartDate       DateTime?
+  contractEndDate         DateTime?
+  subscriptionType        String?
+  paymentTerms            String?
+  lastPurchaseDate        DateTime?
+  totalPurchaseValue      Float?
+  openOpportunities       Int?
+  closedOpportunities     Int?
+  activeContracts         Int?
+  inactiveContracts       Int?
+  isPartner               Boolean   @default(false)
+  isCustomer              Boolean   @default(true)
+  isProspect              Boolean   @default(false)
+  industryVertical        String?
+  referralSource          String?
+  marketingBudget         Float?
+  leadSource              String?
+  businessUnit            String?
+  accountStatus           AccountStatus
+  upsellOpportunities     Int?
+  crossSellOpportunities  Int?
+  competitor              String?
+  accountTier             String?
+  lastContactedDate       DateTime?
+  customerSince           DateTime?
+  loyaltyScore            Int?
+  npsScore                Int?
+  accountRegion           String?
+  preferredContactMethod  String?
+  renewalProbability      Float?
+  strategicAccount        Boolean   @default(false)
+  socialMediaHandle       String?
+  preferredLanguage       String?
+  timezone                String?
+  annualSpend             Float?
+  engagementScore         Int?
+
+  users                   user[]    // Relation to user
+  opportunities           opportunity[]  // Relation to opportunity
+}
+
+model user {
+  id                      Int       @id @default(autoincrement())
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  username                String    @unique
+  email                   String    @unique
+  role                    UserRole  @default(USER)
+  firstName               String
+  lastName                String
+  password                String
+  phoneNumber             String?
+  dateOfBirth             DateTime?
+  gender                  String?
+  jobTitle                String?
+  department              String?
+  isActive                Boolean   @default(true)
+  isVerified              Boolean   @default(false)
+  lastLoginDate           DateTime?
+  profileImageUrl         String?
+  bio                     String?
+  streetAddress           String?
+  city                    String?
+  state                   String?
+  postalCode              String?
+  country                 String?
+  linkedinProfile         String?
+  twitterHandle           String?
+  facebookProfile         String?
+  preferredLanguage       String?
+  timezone                String?
+  loginCount              Int       @default(0)
+  failedLoginAttempts     Int       @default(0)
+  lastPasswordChangeDate  DateTime?
+  accountId               Int       
+  account                 account   @relation(fields: [accountId], references: [id])
+  opportunities           opportunity[]  // Relation to opportunity
+}
+
+model opportunity {
+  id                Int                @id @default(autoincrement())
+  opportunityName   String
+  accountId         Int                
+  account           account            @relation(fields: [accountId], references: [id])
+  ownerId           Int                
+  owner             user               @relation(fields: [ownerId], references: [id])
+  amount            Float
+  closeDate         DateTime?
+  stage             String
+  probability       Float?
+  status            OpportunityStatus  @default(OPEN)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  description       String?
+  source            String?
+}
