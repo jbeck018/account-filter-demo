@@ -1,3 +1,20 @@
+# Starting the app
+
+1. First you'll need to spin up a postgres database and seed it with Prisma.
+
+To do so, run `npm run start:docker` (might need to install docker-compose first)
+The `.env` in the repo should work out the gates with that docker image and prisma.
+
+2. Migrate and seed the database with some dummy data
+
+Run `npm run migrate` followed by `npx prisma db seed`.
+
+3. Run codegen and start up the development server:
+
+Run the following: `npm i && npm run codegen && npm run dev`
+
+4. Code away!
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
