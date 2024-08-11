@@ -12,7 +12,7 @@ export const Input = (props: InputProps<string>) => {
   const [innerValue, setInnerValue] = useState<string>(value || '');
 
   useDebounce(() => handleChange(innerValue), 400, [innerValue]);
-  return <input value={value} style={{ height: 'inherit', width: '100%', minWidth: 75 }} placeholder={'Enter a Value'} onChange={e => setInnerValue(e.target.value)} type="text" />;
+  return <input value={value} style={{ height: 'inherit', maxHeight: 20, width: '100%', minWidth: 75 }} placeholder={'Enter a Value'} onChange={e => setInnerValue(e.target.value)} type="text" />;
 };
 
 export const NumberInput = (props: InputProps<number>) => {
@@ -21,7 +21,7 @@ export const NumberInput = (props: InputProps<number>) => {
 
   useDebounce(() => handleChange(innerValue), 400, [innerValue]);
 
-  return <input style={{ height: 'inherit', width: '100%', minWidth: 40 }} value={value} placeholder={'Enter a Number'} onChange={e => {
+  return <input style={{ height: 'inherit', maxHeight: 20, width: '100%', minWidth: 40 }} value={value} placeholder={'Enter a Number'} onChange={e => {
     setInnerValue(Number(e.target.value));
   }} type="number" />;
 };

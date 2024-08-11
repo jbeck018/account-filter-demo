@@ -7,9 +7,9 @@ import { uniqBy } from 'lodash';
 import find from 'lodash/find';
 import isEqual from 'lodash/isEqual';
 
-import { Input } from '../../../input/input';
 import { PillProps } from '../../../pill';
 import { Option, SelectorBox, SelectorBoxProps } from '../../../selector-box';
+import { gray } from '../../../selector-box/selector-box.styles';
 import { AsyncSelect, MultiSelectActions, RenderOptionParams, SelectBaseProps } from '../../helpers';
 import { useLoadOptions, useOnHighlightedIndexChange, useRecursiveSelect, useSelectState } from '../../hooks';
 import { SelectMenu as Menu } from '../menu/menu';
@@ -144,11 +144,11 @@ function MultiSearchInner<T extends Option>({
   const {
     isOpen,
     getToggleButtonProps,
-    openMenu,
+    // openMenu,
     getMenuProps,
     closeMenu,
     getInputProps,
-    getComboboxProps,
+    // getComboboxProps,
     highlightedIndex,
     inputValue,
     setInputValue,
@@ -320,7 +320,7 @@ function MultiSearchInner<T extends Option>({
     (placeholderElementOuter ? (
       React.cloneElement(placeholderElementOuter, getToggleButtonProps({ disabled }))
     ) : (
-      <span style={isFullWidthInput ? { width: '100%', height: 'inherit'} : {}} {...getToggleButtonProps({ disabled })}>
+      <span style={_isFullWidth ? { width: '100%', height: 40, display: 'flex', alignItems: 'center' } : {}} {...getToggleButtonProps({ disabled })}>
         {placeholder ? placeholder : 'Type here to start filtering...'}
       </span>
     ));
@@ -370,27 +370,30 @@ function MultiSearchInner<T extends Option>({
 
   const valueContainer = (
     <>
-      {selectedItems?.length === 0 && placeholderElement}
+      {!_isFullWidth && selectedItems?.length === 0 && placeholderElement}
       <div
         style={{
           display: 'flex',
           flexWrap: 'nowrap',
           overflowY: 'scroll',
-          alignContent: 'center',
+          alignItems: 'center',
+          padding: 5,
           gap: '5px',
-          ...(isFullWidthInput && { width: '100%', height: 'inherit' }),
+          ...(_isFullWidth && { width: '100%', height: 'inherit' }),
         }}
+        {...getToggleButtonProps({ disabled })}
       >
+        {_isFullWidth && selectedItems?.length === 0 && placeholderElement}
         {selectedItems?.length > 0 && (
           <>
             {renderSelectedItemsFunction}
 
-            {plusJSX}
+            {!_isFullWidth && plusJSX}
           </>
         )}
-        <span style={isFullWidthInput ? { height: 'inherit', width: 'calc(100% - 20px)'} : {}} {...getComboboxProps({ disabled })} onClick={openMenu}>
-          {isOpen && <Input stye={isFullWidthInput ? { height: 'inherit', width: '100%'} : {}} ref={dropdownProps.ref || inputRef} {...getInputProps(dropdownProps)} autoFocus />}
-        </span>
+        {/* <span {...getComboboxProps({ disabled })} onClick={openMenu}>
+          {isOpen && <input stye={{ display: 'hidden' }} ref={dropdownProps.ref || inputRef} {...getInputProps(dropdownProps)} autoFocus />}
+        </span> */}
       </div>
     </>
   );
@@ -404,9 +407,9 @@ function MultiSearchInner<T extends Option>({
           flexDirection: 'row',
           flexWrap: 'nowrap',
           overflowY: 'scroll',
-          alignContent: 'center',
+          alignItems: 'center',
           gap: '5px',
-          ...(isFullWidthInput && { width: '100%' }),
+          ...(_isFullWidth && { width: '100%', border: `1px solid ${gray}`, borderRadius: 4 }),
         }}>
         {valueContainerWrapper ? valueContainerWrapper(valueContainer, { isOpen }) : valueContainer}
       </div>
@@ -438,7 +441,7 @@ function MultiSearchInner<T extends Option>({
         // package requires this function to be called anyway
         <span style={{ display: 'none' }}>
           <ul {...getMenuProps()} />
-          <Input ref={dropdownProps.ref} style={isFullWidthInput ? { width: '100%', height: '100%'} : {}} {...getInputProps(dropdownProps)} />
+          <input ref={dropdownProps.ref} style={isFullWidthInput ? { width: '100%', height: '100%'} : {}} {...getInputProps(dropdownProps)} />
         </span>
       )}
     </>

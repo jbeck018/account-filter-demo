@@ -29,7 +29,7 @@ export function useLoadOptions({
 
       if (options) {
         setState({
-          data: (options as any[]).filter(item => (searchTerm?.trim() ? item.name.includes(searchTerm.trim()) : item)),
+          data: (options as any[]).filter(item => (searchTerm?.trim() ? item.label?.toLowerCase()?.includes(searchTerm.trim()) : item)),
           isLoaded: true,
         });
         return;
@@ -41,7 +41,7 @@ export function useLoadOptions({
           //checking for duplicates is necessary for adding No Type and No Status to selector options.
           const data = isLoadMore
             ? union(prevData.data, response.data)
-            : [...((preOptions as unknown as any[])?.filter(i => i.name.includes(searchTerm)) || []), ...(response.data || [])];
+            : [...((preOptions as unknown as any[])?.filter(i => i?.label?.toLowerCase()?.includes(searchTerm)) || []), ...(response.data || [])];
 
           return {
             data,

@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { MultiSearchSelector } from '../ui-components';
+import { gray } from '../ui-components/selector-box/selector-box.styles';
 
 export const Container = styled.div`
   margin-bottom: 10px;
-  width: calc(100% - 60px);
+  width: 100%
   height: 60px;
 `;
 
@@ -21,4 +22,6 @@ export const Form = styled.form<React.HTMLAttributes<HTMLFormElement>>`
   gap: 10px;
   justify-content: start;
   align-items: center;
+  // border: 1px solid ${gray};
+  // border-radius: 4px;
 `;
