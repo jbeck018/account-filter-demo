@@ -144,11 +144,11 @@ function MultiSearchInner<T extends Option>({
   const {
     isOpen,
     getToggleButtonProps,
-    // openMenu,
+    openMenu,
     getMenuProps,
     closeMenu,
     getInputProps,
-    // getComboboxProps,
+    getComboboxProps,
     highlightedIndex,
     inputValue,
     setInputValue,
@@ -315,12 +315,13 @@ function MultiSearchInner<T extends Option>({
     [disabled, getSelectedItemProps, isFullWidthInput, isOpen, removeSelectedItem, renderOption, renderSelectedItem, selectActions, shouldRenderOptionAsPill]
   );
 
+  const {style, ...toggleProps} = getToggleButtonProps();
   const placeholderElement =
     !isOpen &&
     (placeholderElementOuter ? (
       React.cloneElement(placeholderElementOuter, getToggleButtonProps({ disabled }))
     ) : (
-      <span style={_isFullWidth ? { width: '100%', height: 40, display: 'flex', alignItems: 'center' } : {}} {...getToggleButtonProps({ disabled })}>
+      <span style={_isFullWidth ? { width: '100%', height: 40, display: 'flex', alignItems: 'center', ...style } : {}} onClick={openMenu} {...toggleProps}>
         {placeholder ? placeholder : 'Type here to start filtering...'}
       </span>
     ));
@@ -379,9 +380,10 @@ function MultiSearchInner<T extends Option>({
           alignItems: 'center',
           padding: 5,
           gap: '5px',
-          ...(_isFullWidth && { width: '100%', height: 'inherit' }),
+          ...(_isFullWidth && { width: '100%', height: 'inherit', minHeight: 40 }),
         }}
         {...getToggleButtonProps({ disabled })}
+        onClick={openMenu}
       >
         {_isFullWidth && selectedItems?.length === 0 && placeholderElement}
         {selectedItems?.length > 0 && (
@@ -391,9 +393,9 @@ function MultiSearchInner<T extends Option>({
             {!_isFullWidth && plusJSX}
           </>
         )}
-        {/* <span {...getComboboxProps({ disabled })} onClick={openMenu}>
-          {isOpen && <input stye={{ display: 'hidden' }} ref={dropdownProps.ref || inputRef} {...getInputProps(dropdownProps)} autoFocus />}
-        </span> */}
+        <span style={_isFullWidth ? { minHeight: 40, border: 'none' } : {}} {...getComboboxProps({ disabled })} onClick={openMenu}>
+          {isOpen && <input ref={dropdownProps.ref || inputRef} style={_isFullWidth ? { minHeight: 40, border: 'none' } : {}} {...getInputProps(dropdownProps)} autoFocus />}
+        </span>
       </div>
     </>
   );
