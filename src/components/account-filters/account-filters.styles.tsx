@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { MultiSearchSelector } from '../ui-components';
-import { gray } from '../ui-components/selector-box/selector-box.styles';
+import styled from "styled-components";
+import { MultiSearchSelector } from "../ui-components";
+import { gray } from "../ui-components/selector-box/selector-box.styles";
 
 export const Container = styled.div`
   margin-bottom: 10px;

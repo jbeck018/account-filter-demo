@@ -1,4 +1,4 @@
-import { graphql } from '../../generated';
+import { graphql } from "../../generated";
 
 export const AccountListQueryDocument = graphql(`
   query AccountList($filter: AccountFilter, $after: Cursor, $first: Int, $orderBy: [AccountsOrderBy!]) {

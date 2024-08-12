@@ -1,1 +1,1 @@
-export * from './multi-search-selector';
+export * from "./multi-search-selector";

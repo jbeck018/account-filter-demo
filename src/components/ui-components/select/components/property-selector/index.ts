@@ -1,1 +1,1 @@
-export * from './property-selector';
+export * from "./property-selector";

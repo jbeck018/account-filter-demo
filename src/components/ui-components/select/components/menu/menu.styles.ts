@@ -1,19 +1,20 @@
-import React from 'react';
+import type React from "react";
 
-
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const arrowSize = 12;
-export const arrowOffset = '-6px';
+export const arrowOffset = "-6px";
 
-export const MenuDiv = styled.div<React.HTMLAttributes<HTMLDivElement> & { menuIsWithArrow?: boolean }>`
+export const MenuDiv = styled.div<
+	React.HTMLAttributes<HTMLDivElement> & { menuIsWithArrow?: boolean }
+>`
     outline: none;
     outline-color: transparent;
     min-width: 200px;
     box-sizing: border-box;
     background-color: white;
     filter: drop-shadow(0px 5px 20px rgba(0, 0, 0, 0.15));
-    border-radius: ${props => (props?.menuIsWithArrow ? 4 : 0)}px;
+    border-radius: ${(props) => (props?.menuIsWithArrow ? 4 : 0)}px;
     z-index: 99999998;
     &[data-popper-reference-hidden="true"]: {
       opacity: 0;

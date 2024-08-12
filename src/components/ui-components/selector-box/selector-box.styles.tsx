@@ -1,19 +1,21 @@
-import React from 'react';
-import styled from 'styled-components';
+import type React from "react";
+import styled from "styled-components";
 
-export const gray = '#DBDEE3';
-export const navy3 = '#C6D3D8';
-export const navy4 = '#EDF2F3';
-export const SelectorBoxDiv = styled.div<React.HTMLAttributes<HTMLDivElement> & { 
-  isEditable?: boolean;
-  isRemovableOnHover?: boolean;
-  isEmpty?: boolean;
-  isRemovable?: boolean;
-}>`
-    opacity: ${({ isEditable }) => isEditable ? 0.5 : 'unset'};
-    pointerEvents: ${({ isEditable }) => isEditable ? 'none' : 'unset'};
+export const gray = "#DBDEE3";
+export const navy3 = "#C6D3D8";
+export const navy4 = "#EDF2F3";
+export const SelectorBoxDiv = styled.div<
+	React.HTMLAttributes<HTMLDivElement> & {
+		isEditable?: boolean;
+		isRemovableOnHover?: boolean;
+		isEmpty?: boolean;
+		isRemovable?: boolean;
+	}
+>`
+    opacity: ${({ isEditable }) => (isEditable ? 0.5 : "unset")};
+    pointerEvents: ${({ isEditable }) => (isEditable ? "none" : "unset")};
     display: flex;
-    maxWidth: ${({ isRemovableOnHover }) => isRemovableOnHover ? '210px' : 'unset'}
+    maxWidth: ${({ isRemovableOnHover }) => (isRemovableOnHover ? "210px" : "unset")}
     '&:hover': {
       '& $removeIcon': {
         width: 'auto';
@@ -52,13 +54,15 @@ export const IconStyle = styled.svg<React.HTMLAttributes<HTMLOrSVGElement>>`
     & + div: {
       margin-left: 5px;
     };
-`
+`;
 
-export const RemoveIcon = styled.div<React.HTMLAttributes<HTMLSpanElement> & { isRemovableOnHover?: boolean }>`
+export const RemoveIcon = styled.div<
+	React.HTMLAttributes<HTMLSpanElement> & { isRemovableOnHover?: boolean }
+>`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: ${({ isRemovableOnHover }) => isRemovableOnHover ? 0 : 'unset'};
+    width: ${({ isRemovableOnHover }) => (isRemovableOnHover ? 0 : "unset")};
     overflow: 'hidden';
     flex-shrink: 0;
     margin-left: 4;

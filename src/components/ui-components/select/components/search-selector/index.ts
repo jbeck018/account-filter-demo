@@ -1,2 +1,1 @@
-export * from './search-selector';
-
+export * from "./search-selector";

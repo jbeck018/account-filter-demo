@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const TableContainer = styled.div<React.HTMLAttributes<HTMLDivElement>>`
   position: relative;
@@ -15,7 +15,9 @@ export const StyledTable = styled.table<React.HTMLAttributes<HTMLTableElement>>`
   overflow: scroll;
 `;
 
-export const TableHead = styled.thead<React.HTMLAttributes<HTMLTableCellElement>>`
+export const TableHead = styled.thead<
+	React.HTMLAttributes<HTMLTableCellElement>
+>`
   display: grid;
   position: sticky;
   top: 0;
@@ -23,7 +25,9 @@ export const TableHead = styled.thead<React.HTMLAttributes<HTMLTableCellElement>
   height: 60px;
 `;
 
-export const TableHeadGroup = styled.thead<React.HTMLAttributes<HTMLTableCellElement>>`
+export const TableHeadGroup = styled.thead<
+	React.HTMLAttributes<HTMLTableCellElement>
+>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,19 +38,27 @@ export const TableRow = styled.tr<React.HTMLAttributes<HTMLTableRowElement>>`
   width: 100%;
 `;
 
-export const VirtualizedTableRow = styled.tr<React.HTMLAttributes<HTMLTableRowElement>>`
+export const VirtualizedTableRow = styled.tr<
+	React.HTMLAttributes<HTMLTableRowElement>
+>`
   display: flex;
   width: 100%;
   position: absolute;
 `;
 
 export const TableData = styled.td<
-  React.DetailedHTMLProps<React.TdHTMLAttributes<HTMLTableCellElement>, HTMLTableCellElement>
+	React.DetailedHTMLProps<
+		React.TdHTMLAttributes<HTMLTableCellElement>,
+		HTMLTableCellElement
+	>
 >`
   width: 100%;
 `;
 
-export const TableBody = styled.tbody<React.HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>`
+export const TableBody = styled.tbody<
+	React.HTMLAttributes<HTMLTableSectionElement>,
+	HTMLTableSectionElement
+>`
   display: grid;
   position: relative;
 `;

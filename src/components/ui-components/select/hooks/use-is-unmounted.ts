@@ -1,13 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 export const useIsUnmounted = () => {
-  const isUnmounted = useRef(false);
+	const isUnmounted = useRef(false);
 
-  useEffect(() => {
-    return () => {
-      isUnmounted.current = true;
-    };
-  }, []);
+	useEffect(() => {
+		return () => {
+			isUnmounted.current = true;
+		};
+	}, []);
 
-  return isUnmounted.current;
+	return isUnmounted.current;
 };

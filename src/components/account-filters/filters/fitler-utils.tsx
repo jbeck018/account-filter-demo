@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import styled from "styled-components";
 
 export const FlexRow = styled.div<HTMLAttributes<HTMLDivElement>>`
@@ -12,9 +12,9 @@ export const FlexRow = styled.div<HTMLAttributes<HTMLDivElement>>`
     height: 40px;
     box-sizing: border-box;
     padding: 5px 15px;
-`
+`;
 
 export const TextItem = styled.p`
     font-size: 15px;
     text-wrap: nowrap;
-`
+`;
